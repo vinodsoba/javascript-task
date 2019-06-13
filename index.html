@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Get Countries List - Javascript Task</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="countries.js"></script>
+    <script>
+      for(let i=0; i < getCountries.length; i++){
+        console.log(getCountries[i]);
+      function listCountries(){
+        var html = "<table id='myTable' border='1|1'>";
+         for (var i = 0; i < getCountries.length; i++) {
+          html+="<tr>";
+          html+="<td>"+getCountries[i].name+"</td>";
+          html+="<td class='code'>"+getCountries[i].code+"</td>";
+          html+="<td><input type='checkbox' id='row-selected'"+getCountries[i].checked+"></td>";
+          html+="</tr>";
+        }
+          html+="</table>";
+          document.getElementById("show_countries").innerHTML = html;
+      }
+
+    }
+
+
+$(document).ready(function(){
+  $('#show-table-rows').click(function (event) {
+    var values = [];
+
+    $('table #row-selected:checked').each(function () {
+       var rowValue = $(this).closest('tr').find('td.code').text();
+        values.push(rowValue)
+      });
+
+      var json = JSON.stringify(values);
+
+      alert(json);
+    });
+
+});
+
+    </script>
+  </head>
+  <body>
+    <button type="button" id='show-table-rows' name="show_list" onclick="displayCodes()">Alert</button>
+
+    <input type="text" id="myInput" onkeyup="myFunction().value" placeholder="Search for names.." title="Type in a name">
+    <button type="button" name="button" onclick="listCountries()">Show Countries</button>
+    <div id="show_countries"></div>
+
+    <script>
+
+      function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[0];
+              if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+    </script>
+</body>
+</html>
